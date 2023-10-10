@@ -23,9 +23,9 @@ OEMSpecRouter.get('/:make/:model', async (req, res) => {
 
 OEMSpecRouter.post('/', async (req, res) => {
   try {
-    // if(req.role!=admin){
-    //     res.status(401).json({ message: 'Admin Access Error' });
-    // }
+    if(req.role!=admin){
+        res.status(401).json({ message: 'Admin Access Error' });
+    }
     const { make, model, year, list_price, available_colors, mileage, power_bhp, max_speed } = req.body;
 
     const specs = new OEMSpecs({
@@ -50,6 +50,9 @@ OEMSpecRouter.post('/', async (req, res) => {
 
 OEMSpecRouter.put('/:make/:model', async (req, res) => {
   try {
+    if(req.role!=admin){
+      res.status(401).json({ message: 'Admin Access Error' });
+  }
     const { make, model } = req.params;
     const updatedSpecs = req.body;
 
@@ -69,6 +72,9 @@ OEMSpecRouter.put('/:make/:model', async (req, res) => {
 
 OEMSpecRouter.delete('/:make/:model', async (req, res) => {
   try {
+    if(req.role!=admin){
+      res.status(401).json({ message: 'Admin Access Error' });
+  }
     const { make, model } = req.params;
 
     const result = await OEMSpecs.deleteOne({ make, model });

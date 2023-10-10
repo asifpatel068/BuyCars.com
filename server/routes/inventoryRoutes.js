@@ -18,7 +18,7 @@ inventoryRouter.post('/create',authenticateToken, async (req, res) => {
   }
 });
 
-inventoryRouter.get('/all',authenticateToken, async (req, res) => {
+inventoryRouter.get('/all', async (req, res) => {
   try {
     const inventoryItems = await InventoryModel.find();
     res.json(inventoryItems);
@@ -29,7 +29,7 @@ inventoryRouter.get('/all',authenticateToken, async (req, res) => {
 });
 
 
-inventoryRouter.get('/:id',authenticateToken, async (req, res) => {
+inventoryRouter.get('/:id', async (req, res) => {
   try {
     const inventoryItem = await InventoryModel.findById(req.params.id);
     if (!inventoryItem) {
